@@ -19,6 +19,9 @@ var deployFolder = 'jam_extensions_jars/'; //do not include a leading slash but 
 
 var loading = 0;
 
+var visible = 0; //0 for visible, 1 for invisible toc
+//default start = visible toc
+
 var deployUrl = deployMachine + deployFolder;
 
 var linkId = 'deploy-link';
@@ -258,4 +261,21 @@ function clickIndex(index) {
 	exp.setTime(exp.getTime() + (1000 * 60 * 60 * 24 * 30));     //set it 30 days ahead 
 	setCookie('index',index, exp);
 	location.reload(true);
+}
+
+function toggle() {
+
+    //alert("in toggle function");
+    if (visible == 1) {
+        //alert("inside not visible");
+        visible = 0;
+        $("body").css('margin-left', '250px');
+        $('#toc').toggle('slow', function () {});
+    } else if (visible == 0) {
+        $('#toc').toggle('slow', function () {
+            //alert("inside visible");
+            visible = 1;
+            $("body").css('margin-left', '15px');
+        });
+    }
 }
